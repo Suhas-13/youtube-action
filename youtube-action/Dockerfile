@@ -1,8 +1,7 @@
-FROM python:3.7.10-alpine3.13
-RUN apk update && apk add py-pip libressl-dev libffi-dev gcc python3-dev git nodejs npm nano wget curl net-tools unzip supervisor screen
+FROM python:3.8-slim-buster
+RUN apt-get update && apt-get install -y git nodejs npm nano wget curl net-tools unzip supervisor procps
 COPY . .
-RUN pip install wheel setuptools
-RUN pip install -r requirements.txt
+RUN pip3 install -r requirements.txt
 RUN npm install -g bespoken-tools
 RUN chmod +x entrypoint.sh
 ENTRYPOINT ["./entrypoint.sh"]
